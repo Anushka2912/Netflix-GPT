@@ -3,6 +3,7 @@ import SignIn from './SignIn';
 import Browse from './Browse';
 import { createBrowserRouter } from 'react-router-dom';
 import { RouterProvider } from 'react-router-dom';
+import SignUp from './SignUp';
 
 const Body = () => {
     const appRouter = createBrowserRouter ([
@@ -14,6 +15,10 @@ const Body = () => {
             path: "/browse",
             element: <Browse />
         },
+        {
+            path:"/signup",
+            element: <SignUp />
+        },
     ]);
 
   return (
@@ -23,4 +28,4 @@ const Body = () => {
   )
 }
 
-export default Body
+export default Body;
