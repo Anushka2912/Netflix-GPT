@@ -69,6 +69,16 @@ const SignIn = () => {
                       <input
                         type="text"
                         className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                        placeholder="Enter First Name"
+                      />
+                      <input
+                        type="text"
+                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                        placeholder="Enter Last Name"
+                      />
+                      <input
+                        type="text"
+                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
                         placeholder="Email or mobile number"
                       />
                       <input
