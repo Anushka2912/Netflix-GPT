@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { checkValidData } from '../utils/validate';
 
 const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, SetErrorMessage] = useState(null);
 
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
+  };
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  const handleButtonClick = () => {
+    const message = checkValidData(email.current.value, password.current.value);
+    SetErrorMessage(message);
   };
 
   return (
@@ -17,88 +27,45 @@ const SignIn = () => {
               <div className='HeaderContainer'>
                 <Header /> 
               </div>
-              {isSignIn ?
-                <div className='SignInContainer bg-black bg-opacity-70 w-full max-w-[450px] min-h-[700px] mx-auto mb-[50px] px-[30px]'>
-                  <div className='SignInWrapper flex flex-col gap-7 px-[48px] py-[48px]'>
-                    <div className='HeadingSection'>
-                      <h1 className='text-white text-[32px] font-bold'>Sign In</h1>
-                    </div>
-                    <div className='flex flex-col gap-[16px] FormSection'>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
-                        placeholder="Email or mobile number"
-                      />
-                      <input
-                        type="text"
-                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
-                        placeholder="Password"
-                      />
-                      <button className='bg-red border-red rounded-[5px] text-white font-medium hover:bg-hoverRed w-full p-2'>Sign In</button>
-                      <p className='text-white text-center'>OR</p>
-                      <button className='bg-grey bg-opacity-50 border-grey rounded-[5px] text-white font-medium hover:bg-opacity-30 w-full p-2'>Use a Sign-In Code</button>
-                      <p className='text-white text-center'>Forgot Password?</p>
-                    </div>
-                    <div className=' flex flex-col gap-4 FormFooterSection'>
-                      <div className='flex gap-3 items-center'>
-                        <input type='checkbox' />
-                        <label className='text-white'>Remember Me</label>
-                      </div>
-                      <p className='flex gap-2 items-center'>
-                        <span className='text-white text-opacity-70'>
-                          New to Netflix?
-                        </span>
-                        <button onClick={toggleForm} className='text-white font-medium'>Sign up now.</button>
-                      </p>
-                      <div>
-                        <p className='text-lightGray text-[13px]'>
-                          <span>This page is protected by Google reCAPTCHA to ensure you're not a bot. </span>
-                          <button className='text-blue'>Learn more.</button>
-                        </p>
-                      </div>
-                    </div>
+              <form onSubmit={(e) => e.preventDefault()} className='SignInContainer bg-black bg-opacity-70 w-full max-w-[450px] mx-auto mb-[50px] px-[30px]'>
+                <div className='SignInWrapper flex flex-col gap-7 px-[48px] py-[48px]'>
+                  <div className='HeadingSection'>
+                    <h1 className='text-white text-[32px] font-bold'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
+                  </div>
+                  <div className='flex flex-col gap-[16px] FormSection'>
+                    <input
+                      ref={email}
+                      type="text"
+                      className="w-full px-4 py-4 border text-white bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                      placeholder="Email or mobile number"
+                    />
+                    <input
+                      ref={password}
+                      type="text"
+                      className="w-full px-4 py-4 border text-white bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                      placeholder="Password"
+                    />
+                    <p className='text-[13px] text-red font-medium'>{errorMessage}</p>
+                    <button 
+                      className='bg-red border-red rounded-[5px] text-white font-medium hover:bg-hoverRed w-full p-2'
+                      onClick={handleButtonClick}>
+                        {isSignIn ? "Sign In" : "Sign Up"}
+                    </button>
+                  </div>
+                  <div className='FormFooterSection'>
+                    <p className='flex gap-2 justify-center'>
+                      <span className='text-white text-opacity-70'>
+                        {isSignIn ? "New to Netflix?" : "Already a member?"}
+                      </span>
+                      <button 
+                        className='text-white font-medium'
+                        onClick={toggleForm}>
+                          {isSignIn ? "Sign up now." : "Sign In now."}
+                      </button>
+                    </p>
                   </div>
                 </div>
-                :
-                <div className='SignUnContainer bg-black bg-opacity-70 w-full max-w-[450px] min-h-[700px] mx-auto mb-[50px] px-[30px]'>
-                  <div className='SignUnWrapper flex flex-col gap-7 px-[48px] py-[48px]'>
-                    <div className='HeadingSection'>
-                      <h1 className='text-white text-[32px] font-bold'>Sign Up</h1>
-                    </div>
-                    <div className='flex flex-col gap-[16px] FormSection'>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
-                        placeholder="Enter First Name"
-                      />
-                      <input
-                        type="text"
-                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
-                        placeholder="Enter Last Name"
-                      />
-                      <input
-                        type="text"
-                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
-                        placeholder="Email or mobile number"
-                      />
-                      <input
-                        type="text"
-                        className="w-full px-4 py-4 border bg-gray bg-opacity-70 border-grey rounded-[5px]"
-                        placeholder="Password"
-                      />
-                      <button className='bg-red border-red rounded-[5px] text-white font-medium hover:bg-hoverRed w-full p-2'>Sign Up</button>
-                    </div>
-                    <div className='FormFooterSection'>
-                      <p className='flex gap-2 items-center'>
-                        <span className='text-white text-opacity-70'>
-                          Already a member?
-                        </span>
-                        <button onClick={toggleForm} className='text-white font-medium'>Sign In now.</button>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              }
+              </form>
               <div className='FooterContainer'>
                 <Footer />
               </div>
