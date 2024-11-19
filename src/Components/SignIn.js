@@ -2,17 +2,24 @@ import React, { useState, useRef } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import { checkValidData } from '../utils/validate';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
 
 const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, SetErrorMessage] = useState(null);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
   };
 
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
@@ -25,7 +32,22 @@ const SignIn = () => {
       createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        updateProfile(user, {
+          displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/62440858?v=4"
+        }).then(() => {
+          const {uid, email, displayName, photoURL} = auth.currentUser;
+          dispatch(
+            addUser({
+              uid: uid, 
+              email: email, 
+              displayName: displayName, 
+              photoURL: photoURL
+            })
+          );
+          navigate("/browse");
+        }).catch((error) => {
+          SetErrorMessage(error.message);
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -38,6 +60,7 @@ const SignIn = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
+        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -61,6 +84,12 @@ const SignIn = () => {
                     <h1 className='text-white text-[32px] font-bold'>{isSignIn ? "Sign In" : "Sign Up"}</h1>
                   </div>
                   <div className='flex flex-col gap-[16px] FormSection'>
+                    {!isSignIn && <input
+                      ref={name}
+                      type="text"
+                      className="w-full px-4 py-4 border text-white bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                      placeholder="Your full name"
+                    />}
                     <input
                       ref={email}
                       type="text"
