@@ -4,15 +4,14 @@ import Footer from './Footer';
 import { checkValidData } from '../utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from '../utils/firebase';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVATAR } from '../utils/constant ';
 
 const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, SetErrorMessage] = useState(null);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggleForm = () => {
@@ -33,8 +32,10 @@ const SignIn = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         updateProfile(user, {
-          displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/62440858?v=4"
-        }).then(() => {
+          displayName: name.current.value, 
+          photoURL: {USER_AVATAR}
+        })
+        .then(() => {
           const {uid, email, displayName, photoURL} = auth.currentUser;
           dispatch(
             addUser({
@@ -44,8 +45,8 @@ const SignIn = () => {
               photoURL: photoURL
             })
           );
-          navigate("/browse");
-        }).catch((error) => {
+        })
+        .catch((error) => {
           SetErrorMessage(error.message);
         });
       })
@@ -59,8 +60,6 @@ const SignIn = () => {
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
