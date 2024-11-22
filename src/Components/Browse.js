@@ -1,6 +1,8 @@
 import useNowPlayingMovies from '../CustomHooks/useNowPlayingmovies';
 import Header from './Header';
 import Footer from './Footer';
+import VideoContainer from './VideoContainer';
+import MainContainer from './MainContainer';
 
 const Browse = () => {  
 
@@ -9,9 +11,11 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      <div></div>
+      <VideoContainer />
+      <MainContainer />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default Browse;
