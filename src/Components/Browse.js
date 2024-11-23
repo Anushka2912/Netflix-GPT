@@ -3,10 +3,14 @@ import Header from './Header';
 import Footer from './Footer';
 import VideoContainer from './VideoContainer';
 import MainContainer from './MainContainer';
+import usePopularMovies from '../CustomHooks/usePopularMovies';
+import useUpcomingMovies from '../CustomHooks/useUpcomingMovies';
 
-const Browse = () => {  
+const Browse = () => {
 
   useNowPlayingMovies();
+  usePopularMovies();
+  useUpcomingMovies();
   
   return (
     <div>
