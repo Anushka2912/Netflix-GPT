@@ -44,8 +44,8 @@ const Header = () => {
   }, []);
 
   return (
-    <div className='headerContainer w-full max-w-[1920px] m-auto px-12 py-6'>
-        <div className=' flex justify-between headerWrapper'>
+    <div className='headerContainer relative w-full px-12 py-6 z-10'>
+        <div className=' flex justify-between w-full max-w-[1920px] m-auto headerWrapper'>
           <div className='logoContainer'>
             <img
               alt="logo" 
