@@ -14,7 +14,7 @@ const VideoContainer = () => {
     const {original_title, overview, id} = mainMovie;
 
     return (
-        <div className='bg-gray bg-opacity-30'>
+        <div className='relative w-screen -mt-[130px]'>
             <VideoBackground movieId={id}/>
             <VideoTitle title={original_title} overview={overview} />
         </div>
