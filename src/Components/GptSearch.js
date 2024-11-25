@@ -2,7 +2,7 @@ import React from 'react';
 
 const GptSearch = () => {
   return (
-    <div>GPTSearch</div>
+    <div className='h-[830px]'>GPTSearch</div>
   );
 };
 
