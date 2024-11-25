@@ -5,6 +5,8 @@ import VideoContainer from './VideoContainer';
 import MainContainer from './MainContainer';
 import usePopularMovies from '../CustomHooks/usePopularMovies';
 import useUpcomingMovies from '../CustomHooks/useUpcomingMovies';
+import GptSearch from "./GptSearch";
+
 
 const Browse = () => {
 
@@ -15,6 +17,7 @@ const Browse = () => {
   return (
     <div>
       <Header />
+      <GptSearch />
       <VideoContainer />
       <MainContainer />
       <Footer />
