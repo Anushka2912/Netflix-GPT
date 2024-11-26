@@ -86,19 +86,19 @@ const SignIn = () => {
                     {!isSignIn && <input
                       ref={name}
                       type="text"
-                      className="w-full px-4 py-4 border text-white bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                      className="w-full px-4 py-4 text-white bg-gray bg-opacity-70 border border-grey rounded-[5px]"
                       placeholder="Your full name"
                     />}
                     <input
                       ref={email}
                       type="text"
-                      className="w-full px-4 py-4 border text-white bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                      className="w-full px-4 py-4 text-white bg-gray bg-opacity-70 border border-grey rounded-[5px]"
                       placeholder="Email or mobile number"
                     />
                     <input
                       ref={password}
                       type="text"
-                      className="w-full px-4 py-4 border text-white bg-gray bg-opacity-70 border-grey rounded-[5px]"
+                      className="w-full px-4 py-4 text-white bg-gray bg-opacity-70 border border-grey rounded-[5px]"
                       placeholder="Password"
                     />
                     <p className='text-[13px] text-red font-medium'>{errorMessage}</p>
