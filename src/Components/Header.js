@@ -60,7 +60,7 @@ const Header = () => {
           {user ?
             <div className='flex justify-between gap-3 items-center userContainer'>
               <button 
-                className="text-white hover:text-hoverRed w-full"
+                className="text-red w-full"
                 onClick={handleGptSearch}
               >GPT&nbsp;Search
               </button>
