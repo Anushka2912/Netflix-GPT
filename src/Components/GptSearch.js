@@ -1,8 +1,13 @@
 import React from 'react';
+import GptSearchBar from './GptSearchBar';
+import GptMovieSuggestions from './GptMovieSuggestions';
 
 const GptSearch = () => {
   return (
-    <div className='h-[830px]'>GPTSearch</div>
+    <div className='p-6 m-6'>
+      <GptSearchBar />
+      <GptMovieSuggestions />
+    </div>
   );
 };
 
