@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useEffect } from "react";
-import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constant ";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constant";
 import { toggleGptSearchView  } from "../utils/gptSlice";
 import { changeLanguage } from "../utils/configSlice";
 
@@ -67,7 +67,7 @@ const Header = () => {
           {user ?
             <div className='flex justify-between gap-3 items-center userContainer'>
               <button 
-                className="text-red w-full"
+                className="text-red w-fit"
                 onClick={handleGptSearch}
               >
                 {showGptSearch ? "Home" : "GPT Search"}
